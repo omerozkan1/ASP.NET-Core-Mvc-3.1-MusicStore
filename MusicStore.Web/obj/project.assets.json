@@ -1744,7 +1744,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.12",
           "Microsoft.EntityFrameworkCore": "3.1.12",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.12"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.12",
+          "MusicStore.Models": "1.0.0"
         },
         "compile": {
           "bin/placeholder/MusicStore.DataAccess.dll": {}

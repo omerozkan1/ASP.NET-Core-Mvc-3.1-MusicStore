@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MusicStore.Models.Concrete
+namespace MusicStore.Models.ViewModels
 {
     public class ErrorViewModel
     {

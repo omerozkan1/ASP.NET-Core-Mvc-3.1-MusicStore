@@ -1529,6 +1529,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "MusicStore.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/MusicStore.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MusicStore.Models.dll": {}
+        }
       }
     }
   },
@@ -5748,13 +5758,19 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "MusicStore.Models/1.0.0": {
+      "type": "project",
+      "path": "../MusicStore.Models/MusicStore.Models.csproj",
+      "msbuildProject": "../MusicStore.Models/MusicStore.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.12",
       "Microsoft.EntityFrameworkCore >= 3.1.12",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.12"
+      "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.12",
+      "MusicStore.Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5788,7 +5804,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ÖmerÖzkan\\source\\repos\\MusicStore\\MusicStore.Models\\MusicStore.Models.csproj": {
+              "projectPath": "C:\\Users\\ÖmerÖzkan\\source\\repos\\MusicStore\\MusicStore.Models\\MusicStore.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

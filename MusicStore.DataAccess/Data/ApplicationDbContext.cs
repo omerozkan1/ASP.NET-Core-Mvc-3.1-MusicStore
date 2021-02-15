@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MusicStore.Models.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,7 @@ namespace MusicStore.Web.Data
             : base(options)
         {
         }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }

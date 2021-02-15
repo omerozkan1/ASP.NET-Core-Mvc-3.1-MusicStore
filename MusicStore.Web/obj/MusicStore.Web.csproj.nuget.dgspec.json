@@ -89,7 +89,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\ÖmerÖzkan\\source\\repos\\MusicStore\\MusicStore.Models\\MusicStore.Models.csproj": {
+                "projectPath": "C:\\Users\\ÖmerÖzkan\\source\\repos\\MusicStore\\MusicStore.Models\\MusicStore.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
