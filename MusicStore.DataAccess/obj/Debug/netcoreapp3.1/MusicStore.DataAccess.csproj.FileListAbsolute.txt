@@ -6,3 +6,4 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.DataAccess\obj\Debug\net
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.DataAccess\obj\Debug\netcoreapp3.1\MusicStore.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.DataAccess\obj\Debug\netcoreapp3.1\MusicStore.DataAccess.dll
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.DataAccess\obj\Debug\netcoreapp3.1\MusicStore.DataAccess.pdb
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.DataAccess\obj\Debug\netcoreapp3.1\MusicStore.DataAccess.csprojAssemblyReference.cache
