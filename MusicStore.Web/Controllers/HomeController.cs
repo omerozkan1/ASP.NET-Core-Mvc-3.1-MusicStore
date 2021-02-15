@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MusicStore.Web.Models;
+using MusicStore.Models.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
