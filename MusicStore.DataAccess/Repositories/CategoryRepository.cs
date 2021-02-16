@@ -18,7 +18,6 @@ namespace MusicStore.DataAccess.Repositories
             var data = db.Categories.FirstOrDefault(x => x.Id == category.Id);
             if (data != null)
                 data.CategoryName = category.CategoryName;
-            db.SaveChanges();
         }
     }
 }
