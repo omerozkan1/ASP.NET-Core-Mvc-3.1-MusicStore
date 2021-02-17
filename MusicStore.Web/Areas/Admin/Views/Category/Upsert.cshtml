@@ -1,0 +1,43 @@
+﻿@model MusicStore.Models.DbModels.Category 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Category";
+}
+
+<form method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @if (Model.Id != 0)
+        {
+            title = "Edit Category";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-white">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="col-4">
+                <label asp-for="CategoryName"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-8 offset-4">
+                @if (Model.Id > 0)
+                {
+                    await Component.InvokeAsync("EditAndBackToListButtonViewComponent", Model.Id);
+                }
+                else
+                {
+                    await Component.InvokeAsync("CreateAndBackToListButtonViewComponent");
+                }
+            </div>
+        </div>
+    </div>
+
+
+</form>
