@@ -13,21 +13,21 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\Views\_ViewImports.cshtml"
 using MusicStore.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\Views\_ViewImports.cshtml"
+#line 3 "C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\Views\_ViewImports.cshtml"
 using MusicStore.Models.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"abd3f8eebc063009b100e8f16fd0b5948231b462", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cdfcedce93aa0a9b83893037c64bfb1f39bafb87", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

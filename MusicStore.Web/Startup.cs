@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MusicStore.DataAccess.Interfaces;
+using MusicStore.Web.Containers.MicrosoftIoC;
 using MusicStore.Web.Data;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,7 @@ namespace MusicStore.Web
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddDependencies();
             services.AddRazorPages();
         }
 
