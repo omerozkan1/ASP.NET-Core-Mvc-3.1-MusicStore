@@ -79,7 +79,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
                 uow.Save();
                 return RedirectToAction(nameof(Index));
             }
-                return View(category);
+            return View(category);
         }
     }
 }

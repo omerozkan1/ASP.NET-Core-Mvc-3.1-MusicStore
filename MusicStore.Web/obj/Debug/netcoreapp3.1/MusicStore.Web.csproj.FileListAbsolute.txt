@@ -441,7 +441,7 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Upsert.cshtml.g.cs
-C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CreateAndBackToListButtonViewComponent\Default.cshtml.g.cs
-C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EditAndBackToListButtonViewComponent\Default.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CreateAndBackToListButton\Default.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EditAndBackToListButton\Default.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CoverType\Index.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CoverType\Upsert.cshtml.g.cs
