@@ -80,8 +80,6 @@ namespace MusicStore.Web.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
                 return View(category);
-            }
-            return NotFound();
         }
     }
 }

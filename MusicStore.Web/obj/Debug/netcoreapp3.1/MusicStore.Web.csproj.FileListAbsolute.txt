@@ -443,3 +443,5 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Category\Upsert.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CreateAndBackToListButtonViewComponent\Default.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EditAndBackToListButtonViewComponent\Default.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CreateAndBackToListButton\Default.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EditAndBackToListButton\Default.cshtml.g.cs
