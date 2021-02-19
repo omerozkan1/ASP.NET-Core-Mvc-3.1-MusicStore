@@ -1,4 +1,4 @@
-﻿@model MusicStore.Models.DbModels.Category
+﻿@model MusicStore.Models.DbModels.Category 
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,9 @@
 }
 
 <form method="post">
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         @if (Model.Id != 0)
         {
             title = "Edit Category";
@@ -36,7 +38,8 @@
                 }
             </div>
         </div>
-   
+    </div>
+
 
 </form>
 

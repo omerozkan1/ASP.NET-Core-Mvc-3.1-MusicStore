@@ -30,7 +30,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         {
             var result = uow.category.GetAll();
             return Json(new { data = result });
-        }
+        } 
 
         [HttpDelete]
         public IActionResult Delete(int id)
@@ -55,7 +55,9 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         {
             Category category = new Category();
             if (id == null)
+            {
                 return View(category);
+            }
             category = uow.category.Get((int)id);
             if (category != null)
                 return View(category);
@@ -77,7 +79,9 @@ namespace MusicStore.Web.Areas.Admin.Controllers
                 uow.Save();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+                return View(category);
+            }
+            return NotFound();
         }
     }
 }
