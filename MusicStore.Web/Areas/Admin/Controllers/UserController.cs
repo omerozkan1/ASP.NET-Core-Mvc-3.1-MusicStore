@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
+using MusicStore.Web.Data;
+using System;
+using System.Linq;
 
 namespace MusicStore.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class UserController : Controller
     {
         #region Variables
-        private readonly IUnitOfWork uow; 
+        private readonly ApplicationDbContext db;
         #endregion
 
         #region Ctor
-        public CategoryController(IUnitOfWork uow)
+        public UserController(ApplicationDbContext db)
         {
-            this.uow = uow;
+            this.db = db;
         }
         #endregion
 
@@ -22,64 +26,47 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
-        } 
-        #endregion
-
-        #region Api Calls
-        public IActionResult GetAll()
-        {
-            var result = uow.Category.GetAll();
-            return Json(new { data = result });
-        } 
-
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            var deletedData = uow.Category.Get(id);
-            if (deletedData == null)
-            {
-                return Json(new { success = false, message = "Data Not Found" });
-            }
-            uow.Category.Remove(deletedData);
-            uow.Save();
-            return Json(new { success = true, message = "Delete Operation Successfully" });
         }
         #endregion
 
-        /// <summary>
-        /// Create or update get method.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IActionResult Upsert(int? id)
+        public IActionResult GetAll()
         {
-            Category category = new Category();
-            if (id == null)
-            {
-                return View(category);
-            }
-            category = uow.Category.Get((int)id);
-            if (category != null)
-                return View(category);
+            var userList = db.AppUsers.Include(c => c.Company).ToList();
+            var userRole = db.UserRoles.ToList();
+            var roles = db.Roles.ToList();
 
-            return NotFound();
+            foreach (var user in userList)
+            {
+                var roleId = userRole.FirstOrDefault(u => u.UserId == user.Id).RoleId;
+                user.Role = roles.FirstOrDefault(u => u.Id == roleId).Name;
+
+                if (user.Company == null)
+                {
+                    user.Company = new Company()
+                    {
+                        Name = string.Empty
+                    };
+                }
+            }
+            return Json(new { data = userList });
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Category category)
+        public IActionResult LockUnlock([FromBody] string id)
         {
-            if (ModelState.IsValid)
-            {
-                if (category.Id == 0)
-                    uow.Category.Add(category);
-                else
-                    uow.Category.Update(category);
+            var data = db.AppUsers.FirstOrDefault(u => u.Id == id);
+            if (data == null)
+                return Json(new { success = false, message = "Error while locking/unlocking" });
 
-                uow.Save();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            if (data.LockoutEnd != null && data.LockoutEnd > DateTime.Now)
+                data.LockoutEnd = DateTime.Now;
+
+            else
+                data.LockoutEnd = DateTime.Now.AddYears(10);
+
+            db.SaveChanges();
+            return Json(new { success = true, message = "Operation succesfully" });
         }
+
     }
 }
