@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace MusicStore.Web.Areas.Admin.Controllers
@@ -34,7 +36,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         #region Api Calls
         public IActionResult GetAll()
         {
-            var result = uow.product.GetAll();
+            var result = uow.product.GetAll(includeProperties:"Category");
             return Json(new { data = result });
         } 
 
@@ -59,7 +61,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
-            ProductViewModel product = new ProductViewModel()
+            ProductViewModel productVm = new ProductViewModel()
             {
                 Product = new Product(),
                 CategoryList = uow.category.GetAll().Select(i => new SelectListItem
@@ -75,29 +77,81 @@ namespace MusicStore.Web.Areas.Admin.Controllers
             };
 
             if (id == null)
-                return View(product);
+                return View(productVm);
 
-            product.Product = uow.product.Get(id.GetValueOrDefault());
-            if (product.Product == null)
+            productVm.Product = uow.product.Get(id.GetValueOrDefault());
+            if (productVm.Product == null)
                 return NotFound();
-            return View(product);
+            return View(productVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Product product)
+        public IActionResult Upsert(ProductViewModel productVm)
         {
             if (ModelState.IsValid)
             {
-                if (product.Id == 0)
-                    uow.product.Add(product);
+                string rootPath = hostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(rootPath, @"uploads\products");
+                    var extension = Path.GetExtension(files[0].FileName);
+
+                    if (productVm.Product.ImageUrl != null)
+                    {
+                        var imagePath = Path.Combine(rootPath, productVm.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(uploads,fileName+extension),FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+                    productVm.Product.ImageUrl = @"\uploads\products\" + fileName + extension;
+                }
                 else
-                    uow.product.Update(product);
+                {
+                    if (productVm.Product.Id != 0)
+                    {
+                        var productData = uow.product.Get(productVm.Product.Id);
+                        productVm.Product.ImageUrl = productData.ImageUrl;
+                    }
+                }
+                
+                if (productVm.Product.Id == 0)
+                    uow.product.Add(productVm.Product);
+                else
+                    uow.product.Update(productVm.Product);
 
                 uow.Save();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            else
+            {
+                productVm.CategoryList = uow.category.GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.CategoryName,
+                    Value = x.Id.ToString()
+                });
+
+                productVm.CoverTypeList = uow.coverType.GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                });
+
+                if (productVm.Product.Id != 0)
+                {
+                    productVm.Product = uow.product.Get(productVm.Product.Id);
+                }
+
+            }
+            return View(productVm.Product);
         }
     }
 }

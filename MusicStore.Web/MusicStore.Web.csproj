@@ -22,4 +22,8 @@
     <ProjectReference Include="..\MusicStore.Models\MusicStore.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\products\" />
+  </ItemGroup>
+
 </Project>
