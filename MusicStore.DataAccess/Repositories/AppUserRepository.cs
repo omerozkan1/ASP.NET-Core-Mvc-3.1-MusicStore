@@ -4,17 +4,12 @@ using MusicStore.Web.Data;
 
 namespace MusicStore.DataAccess.Repositories
 {
-    public class CompanyRepository : GenericRepository<Company>, ICompanyRepository
+    public class AppUserRepository : GenericRepository<AppUser>, IAppUserRepository
     {
         private readonly ApplicationDbContext db;
-        public CompanyRepository(ApplicationDbContext db):base(db)
+        public AppUserRepository(ApplicationDbContext db):base(db)
         {
             this.db = db;
-        }
-
-        public void Update(Company company)
-        {
-            db.Update(company);
         }
     }
 }
