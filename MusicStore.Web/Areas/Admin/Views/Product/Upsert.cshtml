@@ -18,131 +18,133 @@
     <div class="col-md-12 border-bottom">
         <h2 class="text-dark">@title</h2>
     </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Title"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.Title" class="form-control" />
-            <span asp-validation-for="Product.Title" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.ISBN"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.ISBN" class="form-control" />
-            <span asp-validation-for="Product.ISBN" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Author"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.Author" class="form-control" />
-            <span asp-validation-for="Product.Author" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Description"></label>
-        </div>
-        <div class="col-md-8">
-            <textarea asp-for="Product.Description" class="form-control"></textarea>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.ListPrice"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.ListPrice" class="form-control" />
-            <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Price"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.Price" class="form-control" />
-            <span asp-validation-for="Product.Price" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Price50"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.Price50" class="form-control" />
-            <span asp-validation-for="Product.Price50" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            <label asp-for="Product.Price100"></label>
-        </div>
-        <div class="col-md-8">
-            <input asp-for="Product.Price100" class="form-control" />
-            <span asp-validation-for="Product.Price100" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            Category
-        </div>
-        <div class="col-md-8">
-            @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList, "Select a Category", new { @class = "form-control" })
-            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            Cover Type
-        </div>
-        <div class="col-md-8">
-            @Html.DropDownListFor(m => m.Product.CoverTypeId, Model.CoverTypeList, "Select a Cover Type", new { @class = "form-control" })
-            <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-8 pt-4">
-        <div class="col-md-4">
-            Image
-        </div>
-        <div class="col-md-8">
-            <input type="file" name="files" id="uploadBox" multiple class="form-control" />
-        </div>
-    </div>
 
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Title"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.Title" class="form-control" />
+                <span asp-validation-for="Product.Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.ISBN"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.ISBN" class="form-control" />
+                <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Author"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.Author" class="form-control" />
+                <span asp-validation-for="Product.Author" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Description"></label>
+            </div>
+            <div class="col-md-8">
+                <textarea asp-for="Product.Description" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.ListPrice"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.ListPrice" class="form-control" />
+                <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Price"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Price50"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.Price50" class="form-control" />
+                <span asp-validation-for="Product.Price50" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="Product.Price100"></label>
+            </div>
+            <div class="col-md-8">
+                <input asp-for="Product.Price100" class="form-control" />
+                <span asp-validation-for="Product.Price100" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                Category
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList, "Select a Category", new { @class = "form-control" })
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                Cover Type
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownListFor(m => m.Product.CoverTypeId, Model.CoverTypeList, "Select a Cover Type", new { @class = "form-control" })
+                <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                Image
+            </div>
+            <div class="col-md-8">
+                <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+            </div>
+        </div>
 
-    <div class="form-group">
-        <div class="col-md-8">
+        <div class="form-group">
+            <div class="col-md-8">
+                @if (Model.Product.Id != 0)
+                {
+                    @await Component.InvokeAsync("EditAndBackToListButton", new { id = Model.Product.Id })
+                }
+                else
+                {
+                    <div class="col-md-8 pt-4">
+                        <div class="row">
+                            <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                        </div>
+                        <div class="row">
+                            <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+                        </div>
+                    </div>
+                }
+            </div>
             @if (Model.Product.Id != 0)
             {
-                @await Component.InvokeAsync("EditAndBackToListButton", new { id = Model.Product.Id })
-            }
-            else
-            {
-                <div class="col-md-8 pt-4">
-                    <div class="row">
-                        <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
-                    </div>
-                    <div class="row">
-                        <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
-                    </div>
+                <div class="col-3 pt-4">
+                    <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:3px; border:1px;" />
                 </div>
             }
         </div>
-        @if (Model.Product.Id != 0)
-        {
-            <div class="col-3 pt-4">
-                <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:3px; border:1px;" />
-            </div>
-        }
     </div>
-
+    
 </form>
 
 @section Scripts{
