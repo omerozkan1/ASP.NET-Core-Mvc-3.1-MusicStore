@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MusicStore.DataAccess.Interfaces;
+using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,15 +15,18 @@ namespace MusicStore.Web.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork uow;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork uow)
         {
             _logger = logger;
+            this.uow = uow;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = uow.product.GetAll(includeProperties: "Category,CoverType");
+            return View(productList);
         }
 
         public IActionResult Privacy()

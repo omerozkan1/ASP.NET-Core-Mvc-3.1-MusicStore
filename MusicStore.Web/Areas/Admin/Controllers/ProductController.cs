@@ -43,12 +43,20 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var deletedDate = uow.product.Get(id);
-            if (deletedDate == null)
+            var deletedData = uow.product.Get(id);
+            if (deletedData == null)
             {
                 return Json(new { success = false, message = "Data Not Found" });
             }
-            uow.product.Remove(deletedDate);
+
+            string rootPath = hostEnvironment.WebRootPath;
+            var imagePath = Path.Combine(rootPath, deletedData.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+
+            uow.product.Remove(deletedData);
             uow.Save();
             return Json(new { success = true, message = "Delete Operation Successfully" });
         }
