@@ -5,19 +5,17 @@ using System.Linq;
 
 namespace MusicStore.DataAccess.Repositories
 {
-    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
+    public class CompanyRepository : GenericRepository<Company>, ICompanyRepository
     {
         private readonly ApplicationDbContext db;
-        public CategoryRepository(ApplicationDbContext db):base(db)
+        public CompanyRepository(ApplicationDbContext db):base(db)
         {
             this.db = db;
         }
 
-        public void Update(Category category)
+        public void Update(Company company)
         {
-            var data = db.Categories.FirstOrDefault(x => x.Id == category.Id);
-            if (data != null)
-                data.CategoryName = category.CategoryName;
+            db.Update(company);
         }
     }
 }

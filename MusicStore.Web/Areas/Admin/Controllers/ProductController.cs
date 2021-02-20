@@ -36,14 +36,14 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         #region Api Calls
         public IActionResult GetAll()
         {
-            var result = uow.product.GetAll(includeProperties:"Category");
+            var result = uow.Product.GetAll(includeProperties:"Category");
             return Json(new { data = result });
         } 
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var deletedData = uow.product.Get(id);
+            var deletedData = uow.Product.Get(id);
             if (deletedData == null)
             {
                 return Json(new { success = false, message = "Data Not Found" });
@@ -56,7 +56,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
                 System.IO.File.Delete(imagePath);
             }
 
-            uow.product.Remove(deletedData);
+            uow.Product.Remove(deletedData);
             uow.Save();
             return Json(new { success = true, message = "Delete Operation Successfully" });
         }
@@ -72,12 +72,12 @@ namespace MusicStore.Web.Areas.Admin.Controllers
             ProductViewModel productVm = new ProductViewModel()
             {
                 Product = new Product(),
-                CategoryList = uow.category.GetAll().Select(i => new SelectListItem
+                CategoryList = uow.Category.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.CategoryName,
                     Value = i.Id.ToString()
                 }),
-                CoverTypeList = uow.coverType.GetAll().Select(i => new SelectListItem
+                CoverTypeList = uow.CoverType.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
@@ -87,7 +87,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
             if (id == null)
                 return View(productVm);
 
-            productVm.Product = uow.product.Get(id.GetValueOrDefault());
+            productVm.Product = uow.Product.Get(id.GetValueOrDefault());
             if (productVm.Product == null)
                 return NotFound();
             return View(productVm);
@@ -126,28 +126,28 @@ namespace MusicStore.Web.Areas.Admin.Controllers
                 {
                     if (productVm.Product.Id != 0)
                     {
-                        var productData = uow.product.Get(productVm.Product.Id);
+                        var productData = uow.Product.Get(productVm.Product.Id);
                         productVm.Product.ImageUrl = productData.ImageUrl;
                     }
                 }
                 
                 if (productVm.Product.Id == 0)
-                    uow.product.Add(productVm.Product);
+                    uow.Product.Add(productVm.Product);
                 else
-                    uow.product.Update(productVm.Product);
+                    uow.Product.Update(productVm.Product);
 
                 uow.Save();
                 return RedirectToAction(nameof(Index));
             }
             else
             {
-                productVm.CategoryList = uow.category.GetAll().Select(x => new SelectListItem
+                productVm.CategoryList = uow.Category.GetAll().Select(x => new SelectListItem
                 {
                     Text = x.CategoryName,
                     Value = x.Id.ToString()
                 });
 
-                productVm.CoverTypeList = uow.coverType.GetAll().Select(x => new SelectListItem
+                productVm.CoverTypeList = uow.CoverType.GetAll().Select(x => new SelectListItem
                 {
                     Text = x.Name,
                     Value = x.Id.ToString()
@@ -155,7 +155,7 @@ namespace MusicStore.Web.Areas.Admin.Controllers
 
                 if (productVm.Product.Id != 0)
                 {
-                    productVm.Product = uow.product.Get(productVm.Product.Id);
+                    productVm.Product = uow.Product.Get(productVm.Product.Id);
                 }
 
             }

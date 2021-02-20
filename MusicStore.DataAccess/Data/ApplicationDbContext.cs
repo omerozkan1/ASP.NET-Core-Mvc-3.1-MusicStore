@@ -17,5 +17,7 @@ namespace MusicStore.Web.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<CoverType> CoverTypes { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Company> Companies { get; set; }
     }
 }

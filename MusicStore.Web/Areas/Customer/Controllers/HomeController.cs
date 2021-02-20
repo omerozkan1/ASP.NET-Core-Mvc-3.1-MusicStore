@@ -25,7 +25,7 @@ namespace MusicStore.Web.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = uow.product.GetAll(includeProperties: "Category,CoverType");
+            IEnumerable<Product> productList = uow.Product.GetAll(includeProperties: "Category,CoverType");
             return View(productList);
         }
 

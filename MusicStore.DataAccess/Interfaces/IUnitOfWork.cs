@@ -4,9 +4,10 @@ namespace MusicStore.DataAccess.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        ICategoryRepository category { get; }
-        ICoverTypeRepository coverType { get; }
-        IProductRepository product { get; }
+        ICategoryRepository Category { get; }
+        ICoverTypeRepository CoverType { get; }
+        IProductRepository Product { get; }
+        ICompanyRepository Company { get; }
         ISPCallRepository sp_call { get; }
         void Save();
     }

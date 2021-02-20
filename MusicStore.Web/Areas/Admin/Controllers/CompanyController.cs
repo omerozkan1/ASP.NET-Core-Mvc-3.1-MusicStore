@@ -5,14 +5,14 @@ using MusicStore.Models.DbModels;
 namespace MusicStore.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class CompanyController : Controller
     {
         #region Variables
         private readonly IUnitOfWork uow; 
         #endregion
 
         #region Ctor
-        public CategoryController(IUnitOfWork uow)
+        public CompanyController(IUnitOfWork uow)
         {
             this.uow = uow;
         }
@@ -28,19 +28,19 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         #region Api Calls
         public IActionResult GetAll()
         {
-            var result = uow.Category.GetAll();
+            var result = uow.Company.GetAll();
             return Json(new { data = result });
         } 
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var deletedData = uow.Category.Get(id);
+            var deletedData = uow.Company.Get(id);
             if (deletedData == null)
             {
                 return Json(new { success = false, message = "Data Not Found" });
             }
-            uow.Category.Remove(deletedData);
+            uow.Company.Remove(deletedData);
             uow.Save();
             return Json(new { success = true, message = "Delete Operation Successfully" });
         }
@@ -53,33 +53,33 @@ namespace MusicStore.Web.Areas.Admin.Controllers
         /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
-            Category category = new Category();
+            Company company = new Company();
             if (id == null)
             {
-                return View(category);
+                return View(company);
             }
-            category = uow.Category.Get((int)id);
-            if (category != null)
-                return View(category);
+            company = uow.Company.Get((int)id);
+            if (company != null)
+                return View(company);
 
             return NotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Category category)
+        public IActionResult Upsert(Company company)
         {
             if (ModelState.IsValid)
             {
-                if (category.Id == 0)
-                    uow.Category.Add(category);
+                if (company.Id == 0)
+                    uow.Company.Add(company);
                 else
-                    uow.Category.Update(category);
+                    uow.Company.Update(company);
 
                 uow.Save();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(company);
         }
     }
 }
