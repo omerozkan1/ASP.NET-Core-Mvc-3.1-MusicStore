@@ -6,6 +6,7 @@ namespace MusicStore.DataAccess.Interfaces
     {
         ICategoryRepository category { get; }
         ICoverTypeRepository coverType { get; }
+        IProductRepository product { get; }
         ISPCallRepository sp_call { get; }
         void Save();
     }

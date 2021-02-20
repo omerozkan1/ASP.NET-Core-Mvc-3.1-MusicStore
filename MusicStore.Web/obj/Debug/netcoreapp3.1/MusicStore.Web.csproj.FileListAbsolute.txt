@@ -445,3 +445,5 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EditAndBackToListButton\Default.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CoverType\Index.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CoverType\Upsert.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
