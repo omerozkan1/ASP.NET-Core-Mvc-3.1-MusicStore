@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MusicStore.Models.DbModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MusicStore.Web.Data
 {
@@ -19,5 +16,8 @@ namespace MusicStore.Web.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }
