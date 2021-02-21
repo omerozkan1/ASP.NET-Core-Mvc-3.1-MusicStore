@@ -1,3 +1,4 @@
+using MailKit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MusicStore.Core.Helper;
 using MusicStore.DataAccess.Interfaces;
+using MusicStore.DataAccess.Repositories;
 using MusicStore.Web.Containers.MicrosoftIoC;
 using MusicStore.Web.Data;
 using System;
@@ -36,7 +39,11 @@ namespace MusicStore.Web
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddDependencies();
+            services.AddDependencies(Configuration);
+
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+
+
             services.AddRazorPages();
             services.AddMvc();
 

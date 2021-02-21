@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MimeKit;
 using System;
 using System.Threading.Tasks;
 
@@ -6,22 +10,46 @@ namespace MusicStore.Core.Helper
 {
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        private SmtpSettings _smtpSettings;
+        private IWebHostEnvironment _env;
+        public EmailSender(IOptions<SmtpSettings> smtpSettings, IWebHostEnvironment env)
         {
-            throw new NotImplementedException();
+            _smtpSettings = smtpSettings.Value;
+            _env = env;
         }
+        public async Task SendEmailAsync(string email, string subject, string body)
+        {
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(_smtpSettings.SenderName, _smtpSettings.SenderEmail));
+                message.To.Add(new MailboxAddress(email));
+                message.Subject = subject;
+                message.Body = new TextPart("html")
+                {
+                    Text = body
+                };
 
-        //static async Task Execute()
-        //{
-        //    var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
-        //    var client = new SendGridClient(apiKey);
-        //    var from = new EmailAddress("test@example.com", "Example User");
-        //    var subject = "Sending with SendGrid is Fun";
-        //    var to = new EmailAddress("test@example.com", "Example User");
-        //    var plainTextContent = "and easy to do anywhere, even with C#";
-        //    var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-        //    var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-        //    var response = await client.SendEmailAsync(msg);
-        //}
+                using (var client = new SmtpClient())
+                {
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    if (_env.IsDevelopment())
+                    {
+                        await client.ConnectAsync(_smtpSettings.Server, _smtpSettings.Port, true);
+                    }
+                    else
+                    {
+                        await client.ConnectAsync(_smtpSettings.Server);
+                    }
+                    await client.AuthenticateAsync(_smtpSettings.UserName, _smtpSettings.Password);
+                    await client.SendAsync(message);
+                    await client.DisconnectAsync(true);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
     }
 }

@@ -492,3 +492,9 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\User\Index.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\SendGrid.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
