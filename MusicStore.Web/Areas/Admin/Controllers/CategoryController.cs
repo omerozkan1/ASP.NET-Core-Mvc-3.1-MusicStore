@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MusicStore.Core.Const;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 
 namespace MusicStore.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ProjectConstant.Role_Admin)]
     public class CategoryController : Controller
     {
         #region Variables

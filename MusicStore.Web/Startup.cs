@@ -39,6 +39,25 @@ namespace MusicStore.Web
             services.AddDependencies();
             services.AddRazorPages();
             services.AddMvc();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "172145914480907";
+                options.AppSecret = "51bacf3141e62b7840004d6d08007646";
+            });
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "654958873555-ig18194s5i44u0hlnqnlcdhhorehipkg.apps.googleusercontent.com";
+                options.ClientSecret = "NtlCrPqrTSt67Lp9H4MhUrlp";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

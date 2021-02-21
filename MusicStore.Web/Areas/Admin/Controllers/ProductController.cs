@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MusicStore.Core.Const;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
@@ -11,6 +13,7 @@ using System.Linq;
 namespace MusicStore.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ProjectConstant.Role_Admin)]
     public class ProductController : Controller
     {
         #region Variables
