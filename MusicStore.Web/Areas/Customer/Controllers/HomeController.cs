@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MusicStore.Core.Const;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
@@ -28,6 +30,13 @@ namespace MusicStore.Web.Areas.Customer.Controllers
         public IActionResult Index()
         {
             IEnumerable<Product> productList = uow.Product.GetAll(includeProperties: "Category,CoverType");
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim != null)
+            {
+                var shoppingCount = uow.ShoppingCart.GetAll(a => a.AppUserId == claim.Value).ToList().Count();
+                HttpContext.Session.SetInt32(ProjectConstant.ShoppingCart, shoppingCount);
+            }
             return View(productList);
         }
 
@@ -67,6 +76,8 @@ namespace MusicStore.Web.Areas.Customer.Controllers
                 }
 
                 uow.Save();
+                var shoppingCount = uow.ShoppingCart.GetAll(a => a.AppUserId == cartModel.AppUserId).ToList().Count();
+                HttpContext.Session.SetInt32(ProjectConstant.ShoppingCart,shoppingCount);
                 return RedirectToAction(nameof(Index));
             }
             else

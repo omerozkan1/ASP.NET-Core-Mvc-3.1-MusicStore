@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MusicStore.DataAccess.Interfaces;
+using Microsoft.AspNetCore.Http;
+using MusicStore.Core.Const;
 
 namespace MusicStore.Web.Areas.Identity.Pages.Account
 {
@@ -20,14 +23,16 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUnitOfWork _uow;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _uow = uow;
         }
 
         [BindProperty]
@@ -82,6 +87,11 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = _uow.AppUser.GetFirstOrDefault(u => u.Email == Input.Email);
+                    int count = _uow.ShoppingCart.GetAll(u => u.AppUserId == user.Id).Count();
+
+                    HttpContext.Session.SetInt32(ProjectConstant.ShoppingCart, count);
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
