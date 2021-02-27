@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+
 
 namespace MusicStore.Models.DbModels
 {
@@ -22,7 +21,7 @@ namespace MusicStore.Models.DbModels
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public Product MyProProductperty { get; set; }
+        public Product Product { get; set; }
 
         [Range(1,1000,ErrorMessage ="Lütfen  1-1000 arasında bir değer giriniz.")]
         public int Count { get; set; }

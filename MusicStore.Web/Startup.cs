@@ -65,6 +65,13 @@ namespace MusicStore.Web
                 options.ClientId = "654958873555-ig18194s5i44u0hlnqnlcdhhorehipkg.apps.googleusercontent.com";
                 options.ClientSecret = "NtlCrPqrTSt67Lp9H4MhUrlp";
             });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +92,7 @@ namespace MusicStore.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

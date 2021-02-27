@@ -2,8 +2,8 @@
 
 namespace MusicStore.DataAccess.Interfaces
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
+    public interface ICompanyRepository : IGenericRepository<Company>
     {
-        void Update(Category category);
+        void Update(Company company);
     }
 }
