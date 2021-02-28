@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ypPCcmvcQk8TJxoNpK3zLZFku7dfInj/xzq2/XDmnFEz9JW2N+627GZ8Y8sKitUu5zJXdjZ29wA1o05oXz9syQ==",
+  "dgSpecHash": "iPI2kjSUqHpj18mrZVSddhKY7ygmo6nJMwxK/s4drQf2MPwROvGj4zXJw3tx/ujAReJcnMbh7jFtm+muaoCOmg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ÖmerÖzkan\\source\\repos\\MusicStore\\MusicStore.Web\\MusicStore.Web.csproj",
   "expectedPackageFiles": [
@@ -127,6 +127,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\sendgrid\\9.22.0\\sendgrid.9.22.0.nupkg.sha512",
     "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\starkbank-ecdsa\\1.2.0\\starkbank-ecdsa.1.2.0.nupkg.sha512",
+    "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\stripe.net\\39.38.0\\stripe.net.39.38.0.nupkg.sha512",
     "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\ÖmerÖzkan\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

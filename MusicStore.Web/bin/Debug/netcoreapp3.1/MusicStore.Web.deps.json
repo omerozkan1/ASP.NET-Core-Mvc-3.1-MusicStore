@@ -39,6 +39,7 @@
           "MusicStore.DataAccess": "1.0.0",
           "MusicStore.Models": "1.0.0",
           "NETCore.MailKit": "2.0.3",
+          "Stripe.net": "39.38.0",
           "Microsoft.AspNetCore.Antiforgery.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1756,6 +1757,22 @@
           "lib/netstandard2.1/StarkbankEcdsa.dll": {}
         }
       },
+      "Stripe.net/39.38.0": {
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
+          "Newtonsoft.Json": "12.0.2",
+          "System.Configuration.ConfigurationManager": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Stripe.net.dll": {
+            "assemblyVersion": "39.38.0.0",
+            "fileVersion": "39.38.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Stripe.net.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1990,6 +2007,9 @@
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.26515.6"
           }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         }
       },
       "System.Console/4.3.0": {
@@ -5206,6 +5226,13 @@
       "sha512": "sha512-hP53QPYOOEIR44EK9phz+DYliM6DEieDZxpb8GZzE+++qyrWqUscKcyHCC6L9yu/ehllYtqxtT4qrjWDsuQlUQ==",
       "path": "starkbank-ecdsa/1.2.0",
       "hashPath": "starkbank-ecdsa.1.2.0.nupkg.sha512"
+    },
+    "Stripe.net/39.38.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Iga+e0MmwLWyyz06J5L2W8nlAdCJhZnecGW52pO7pZgPErJFh1R66dR9Am1ovRPpdLpTUENhbz+/11WUkQhrjA==",
+      "path": "stripe.net/39.38.0",
+      "hashPath": "stripe.net.39.38.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

@@ -9,10 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusicStore.Core.Helper;
+using MusicStore.Core.Stripe;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.DataAccess.Repositories;
 using MusicStore.Web.Containers.MicrosoftIoC;
 using MusicStore.Web.Data;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +42,14 @@ namespace MusicStore.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             //services.AddDependencies(Configuration);
 
-         
+
 
 
             services.AddRazorPages();
@@ -92,6 +96,8 @@ namespace MusicStore.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

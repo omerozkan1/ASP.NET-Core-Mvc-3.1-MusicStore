@@ -326,6 +326,10 @@
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[39.38.0, )"
             }
           },
           "imports": [

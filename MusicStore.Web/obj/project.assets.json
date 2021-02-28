@@ -1781,6 +1781,20 @@
           "lib/netstandard2.1/StarkbankEcdsa.dll": {}
         }
       },
+      "Stripe.net/39.38.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "1.1.0",
+          "Newtonsoft.Json": "11.0.1",
+          "System.Configuration.ConfigurationManager": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Stripe.net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Stripe.net.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2060,7 +2074,7 @@
           "System.Security.Permissions": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
@@ -5914,6 +5928,28 @@
         "lib/netstandard2.1/StarkbankEcdsa.dll",
         "starkbank-ecdsa.1.2.0.nupkg.sha512",
         "starkbank-ecdsa.nuspec"
+      ]
+    },
+    "Stripe.net/39.38.0": {
+      "sha512": "Iga+e0MmwLWyyz06J5L2W8nlAdCJhZnecGW52pO7pZgPErJFh1R66dR9Am1ovRPpdLpTUENhbz+/11WUkQhrjA==",
+      "type": "package",
+      "path": "stripe.net/39.38.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon.png",
+        "lib/net461/Stripe.net.dll",
+        "lib/net461/Stripe.net.pdb",
+        "lib/net461/Stripe.net.xml",
+        "lib/net5.0/Stripe.net.dll",
+        "lib/net5.0/Stripe.net.pdb",
+        "lib/net5.0/Stripe.net.xml",
+        "lib/netstandard2.0/Stripe.net.dll",
+        "lib/netstandard2.0/Stripe.net.pdb",
+        "lib/netstandard2.0/Stripe.net.xml",
+        "stripe.net.39.38.0.nupkg.sha512",
+        "stripe.net.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -10218,7 +10254,8 @@
       "MusicStore.Core >= 1.0.0",
       "MusicStore.DataAccess >= 1.0.0",
       "MusicStore.Models >= 1.0.0",
-      "NETCore.MailKit >= 2.0.3"
+      "NETCore.MailKit >= 2.0.3",
+      "Stripe.net >= 39.38.0"
     ]
   },
   "packageFolders": {
@@ -10323,6 +10360,10 @@
           "NETCore.MailKit": {
             "target": "Package",
             "version": "[2.0.3, )"
+          },
+          "Stripe.net": {
+            "target": "Package",
+            "version": "[39.38.0, )"
           }
         },
         "imports": [

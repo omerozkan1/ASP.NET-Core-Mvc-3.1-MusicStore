@@ -17,6 +17,13 @@
 
         public const string ShoppingCart = "ShoppingCart";
 
+        // PaymentStatus
+        public const string PaymentStatusPending = "Pending";
+
+
+        // OrderStatus
+        public const string StatusPending = "Pending";
+
 
         public static double GetPriceBaseOnQuantity(int quantity, double price, double price50, double price100)
         {

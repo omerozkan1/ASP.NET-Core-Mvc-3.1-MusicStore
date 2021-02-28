@@ -7,6 +7,8 @@ using MusicStore.Core.Helper;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -154,6 +156,48 @@ namespace MusicStore.Web.Areas.Customer.Controllers
             ShoppingCartViewModel.Order.PostalCode = ShoppingCartViewModel.Order.AppUser.PostalCode;
 
             return View(ShoppingCartViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Summary")]
+        public IActionResult SummaryPost()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            ShoppingCartViewModel.Order.AppUser = uow.AppUser.GetFirstOrDefault(a => a.Id == claims.Value, includeProperties: "Company");
+            ShoppingCartViewModel.CartList = uow.ShoppingCart.GetAll(s => s.AppUserId == claims.Value, includeProperties: "Product");
+
+            ShoppingCartViewModel.Order.PaymentStatus = ProjectConstant.PaymentStatusPending;
+            ShoppingCartViewModel.Order.OrderStatus = ProjectConstant.PaymentStatusPending;
+            ShoppingCartViewModel.Order.AppUserId = claims.Value;
+            ShoppingCartViewModel.Order.OrderDate = DateTime.Now;
+
+            uow.Order.Add(ShoppingCartViewModel.Order);
+            uow.Save();
+
+            List<OrderDetail> orderDetailList = new List<OrderDetail>();
+            foreach (var orderDetail in ShoppingCartViewModel.CartList)
+            {
+                orderDetail.Price = ProjectConstant.GetPriceBaseOnQuantity(orderDetail.Count, orderDetail.Product.Price, orderDetail.Product.Price50, orderDetail.Product.Price100);
+
+                OrderDetail detail = new OrderDetail()
+                {
+                    ProductId = orderDetail.ProductId,
+                    OrderId = ShoppingCartViewModel.Order.Id,
+                    Price = orderDetail.Price,
+                    Count = orderDetail.Count
+                };
+
+                ShoppingCartViewModel.Order.OrderTotal += detail.Count * detail.Price;
+                uow.OrderDetail.Add(detail);
+            }
+            uow.ShoppingCart.RemoveRange(ShoppingCartViewModel.CartList);
+            uow.Save();
+            HttpContext.Session.SetInt32(ProjectConstant.ShoppingCart, 0);
+
+            return RedirectToAction("OrderConfirmation", "Cart", new { id = ShoppingCartViewModel.Order.Id });
         }
     }
 }
