@@ -104,13 +104,15 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser 
-                { 
-                    UserName = Input.Email, 
+                //var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new AppUser
+                {
+                    UserName = Input.Email,
                     Email = Input.Email,
                     CompanyId = Input.CompanyId,
                     StreetAddress = Input.StreetAddress,
                     City = Input.City,
+                    State = Input.State,
                     PostalCode = Input.PostalCode,
                     Name = Input.Name,
                     PhoneNumber = Input.PhoneNumber,
@@ -120,23 +122,6 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_Admin))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_Admin));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_Employee))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_Employee));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_User_Comp))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_User_Comp));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_User_Indi))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_User_Indi));
-                    }
 
                     if (user.Role == null)
                     {
@@ -156,17 +141,19 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
                     else
                     {
+
                         if (user.Role == null)
                         {
                             await _signInManager.SignInAsync(user, isPersistent: false);
@@ -174,10 +161,10 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
                         }
                         else
                         {
-                            // TODO: Admin is registering new user
+                            //TODO:Admin is Registering new user
                             return RedirectToAction("Index", "User", new { Area = "Admin" });
                         }
-                     
+
                     }
                 }
                 foreach (var error in result.Errors)
@@ -186,8 +173,97 @@ namespace MusicStore.Web.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+
             return Page();
+
+            //returnUrl = returnUrl ?? Url.Content("~/");
+            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            //if (ModelState.IsValid)
+            //{
+            //    var user = new AppUser 
+            //    { 
+            //        UserName = Input.Email, 
+            //        Email = Input.Email,
+            //        CompanyId = Input.CompanyId,
+            //        StreetAddress = Input.StreetAddress,
+            //        City = Input.City,
+            //        PostalCode = Input.PostalCode,
+            //        Name = Input.Name,
+            //        PhoneNumber = Input.PhoneNumber,
+            //        Role = Input.Role
+            //    };
+            //    var result = await _userManager.CreateAsync(user, Input.Password);
+            //    if (result.Succeeded)
+            //    {
+            //        _logger.LogInformation("User created a new account with password.");
+
+            //        if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_Admin))
+            //        {
+            //            await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_Admin));
+            //        }
+            //        if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_Employee))
+            //        {
+            //            await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_Employee));
+            //        }
+            //        if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_User_Comp))
+            //        {
+            //            await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_User_Comp));
+            //        }
+            //        if (!await _roleManager.RoleExistsAsync(ProjectConstant.Role_User_Indi))
+            //        {
+            //            await _roleManager.CreateAsync(new IdentityRole(ProjectConstant.Role_User_Indi));
+            //        }
+
+            //        if (user.Role == null)
+            //        {
+            //            await _userManager.AddToRoleAsync(user, ProjectConstant.Role_User_Indi);
+            //        }
+            //        else
+            //        {
+            //            if (user.CompanyId > 0)
+            //            {
+            //                await _userManager.AddToRoleAsync(user, ProjectConstant.Role_User_Comp);
+            //            }
+            //            await _userManager.AddToRoleAsync(user, user.Role);
+            //        }
+
+            //        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            //        var callbackUrl = Url.Page(
+            //            "/Account/ConfirmEmail",
+            //            pageHandler: null,
+            //            values: new { area = "Identity", userId = user.Id, code = code },
+            //            protocol: Request.Scheme);
+
+            //        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+            //        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+            //        {
+            //            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+            //        }
+            //        else
+            //        {
+            //            if (user.Role == null)
+            //            {
+            //                await _signInManager.SignInAsync(user, isPersistent: false);
+            //                return LocalRedirect(returnUrl);
+            //            }
+            //            else
+            //            {
+            //                // TODO: Admin is registering new user
+            //                return RedirectToAction("Index", "User", new { Area = "Admin" });
+            //            }
+
+            //        }
+            //    }
+            //    foreach (var error in result.Errors)
+            //    {
+            //        ModelState.AddModelError(string.Empty, error.Description);
+            //    }
+            //}
+
+            //// If we got this far, something failed, redisplay form
+            //return Page();
         }
     }
 }

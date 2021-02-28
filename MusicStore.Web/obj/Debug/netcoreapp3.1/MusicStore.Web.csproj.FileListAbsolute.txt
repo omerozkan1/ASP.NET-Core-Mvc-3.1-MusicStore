@@ -499,3 +499,4 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\Details.cshtml.g.cs
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Index.cshtml.g.cs

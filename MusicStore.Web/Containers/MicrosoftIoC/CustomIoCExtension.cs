@@ -8,7 +8,7 @@ namespace MusicStore.Web.Containers.MicrosoftIoC
 {
     public static class CustomIoCExtension
     {
-        public static void AddDependencies(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDependencies(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEmailSender, EmailSender>();

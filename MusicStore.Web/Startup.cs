@@ -39,9 +39,13 @@ namespace MusicStore.Web
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddDependencies(Configuration);
 
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            //services.AddDependencies(Configuration);
+
+         
 
 
             services.AddRazorPages();
