@@ -126,5 +126,34 @@ namespace MusicStore.Web.Areas.Customer.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Summary()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            ShoppingCartViewModel = new ShoppingCartViewModel()
+            {
+                Order = new Order(),
+                CartList = uow.ShoppingCart.GetAll(u => u.AppUserId == claims.Value, includeProperties: "Product")
+            };
+
+            ShoppingCartViewModel.Order.AppUser = uow.AppUser.GetFirstOrDefault(u => u.Id == claims.Value, includeProperties: "Company");
+
+            foreach (var item in ShoppingCartViewModel.CartList)
+            {
+                item.Price = ProjectConstant.GetPriceBaseOnQuantity(item.Count, item.Product.Price, item.Product.Price50, item.Product.Price100);
+                ShoppingCartViewModel.Order.OrderTotal += (item.Price * item.Count);
+            }
+
+            ShoppingCartViewModel.Order.Name = ShoppingCartViewModel.Order.AppUser.Name;
+            ShoppingCartViewModel.Order.PhoneNumber = ShoppingCartViewModel.Order.AppUser.PhoneNumber;
+            ShoppingCartViewModel.Order.StreetAddress = ShoppingCartViewModel.Order.AppUser.StreetAddress;
+            ShoppingCartViewModel.Order.City = ShoppingCartViewModel.Order.AppUser.City;
+            ShoppingCartViewModel.Order.State = ShoppingCartViewModel.Order.AppUser.State;
+            ShoppingCartViewModel.Order.PostalCode = ShoppingCartViewModel.Order.AppUser.PostalCode;
+
+            return View(ShoppingCartViewModel);
+        }
     }
 }
