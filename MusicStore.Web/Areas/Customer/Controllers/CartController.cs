@@ -202,7 +202,9 @@ namespace MusicStore.Web.Areas.Customer.Controllers
 
             if (stripeToken == null)
             {
-
+                ShoppingCartViewModel.Order.PaymentDueDate = DateTime.Now.AddDays(30);
+                ShoppingCartViewModel.Order.PaymentStatus = ProjectConstant.PaymentStatusDelayed;
+                ShoppingCartViewModel.Order.OrderStatus = ProjectConstant.PaymentStatusApproved;
             }
             else
             {

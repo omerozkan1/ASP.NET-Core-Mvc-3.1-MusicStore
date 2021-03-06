@@ -21,6 +21,7 @@
         public const string PaymentStatusPending = "Pending";
         public const string PaymentStatusRejected = "Rejected";
         public const string PaymentStatusApproved = "Approved";
+        public const string PaymentStatusDelayed = "Delayed";
         
 
         // OrderStatus
