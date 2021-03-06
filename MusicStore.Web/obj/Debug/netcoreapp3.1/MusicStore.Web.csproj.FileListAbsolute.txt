@@ -502,3 +502,4 @@ C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Index.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\Summary.cshtml.g.cs
 C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\bin\Debug\netcoreapp3.1\Stripe.net.dll
+C:\Users\ÖmerÖzkan\source\repos\MusicStore\MusicStore.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Cart\OrderConfirmation.cshtml.g.cs

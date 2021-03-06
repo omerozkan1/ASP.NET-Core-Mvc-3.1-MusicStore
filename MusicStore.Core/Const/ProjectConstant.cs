@@ -19,10 +19,13 @@
 
         // PaymentStatus
         public const string PaymentStatusPending = "Pending";
-
+        public const string PaymentStatusRejected = "Rejected";
+        public const string PaymentStatusApproved = "Approved";
+        
 
         // OrderStatus
         public const string StatusPending = "Pending";
+        public const string StatusApproved = "Approved";
 
 
         public static double GetPriceBaseOnQuantity(int quantity, double price, double price50, double price100)

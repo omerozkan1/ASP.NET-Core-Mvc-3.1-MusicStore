@@ -7,6 +7,7 @@ using MusicStore.Core.Helper;
 using MusicStore.DataAccess.Interfaces;
 using MusicStore.Models.DbModels;
 using MusicStore.Models.ViewModels;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ namespace MusicStore.Web.Areas.Customer.Controllers
             this.emailSender = emailSender;
             this.userManager = userManager;
         }
+
+        [BindProperty]
         public ShoppingCartViewModel ShoppingCartViewModel { get; set; }
         public IActionResult Index()
         {
@@ -36,7 +39,7 @@ namespace MusicStore.Web.Areas.Customer.Controllers
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             ShoppingCartViewModel = new ShoppingCartViewModel()
             {
-                Order = new Order(),
+                Order = new Models.DbModels.Order(),
                 CartList = uow.ShoppingCart.GetAll(u => u.AppUserId == claims.Value, includeProperties: "Product")
             };
 
@@ -136,7 +139,7 @@ namespace MusicStore.Web.Areas.Customer.Controllers
 
             ShoppingCartViewModel = new ShoppingCartViewModel()
             {
-                Order = new Order(),
+                Order = new Models.DbModels.Order(),
                 CartList = uow.ShoppingCart.GetAll(u => u.AppUserId == claims.Value, includeProperties: "Product")
             };
 
@@ -161,7 +164,7 @@ namespace MusicStore.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Summary")]
-        public IActionResult SummaryPost()
+        public IActionResult SummaryPost(string stripeToken)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -194,10 +197,47 @@ namespace MusicStore.Web.Areas.Customer.Controllers
                 uow.OrderDetail.Add(detail);
             }
             uow.ShoppingCart.RemoveRange(ShoppingCartViewModel.CartList);
-            uow.Save();
+     
             HttpContext.Session.SetInt32(ProjectConstant.ShoppingCart, 0);
 
+            if (stripeToken == null)
+            {
+
+            }
+            else
+            {
+                var options = new ChargeCreateOptions
+                {
+                    Amount = Convert.ToInt32(ShoppingCartViewModel.Order.OrderTotal * 100),
+                    Currency = "try",
+                    Description = "Order Id : " + ShoppingCartViewModel.Order.Id,
+                    Source = stripeToken
+                };
+
+                var service = new ChargeService();
+                Charge charge = service.Create(options);
+
+                if (charge.BalanceTransactionId == null)
+                    ShoppingCartViewModel.Order.PaymentStatus = ProjectConstant.PaymentStatusRejected;
+                else
+                    ShoppingCartViewModel.Order.TransactionId = charge.BalanceTransactionId;
+
+                if (charge.Status.ToLower() == "succeeded")
+                {
+                    ShoppingCartViewModel.Order.PaymentStatus = ProjectConstant.PaymentStatusApproved;
+                    ShoppingCartViewModel.Order.OrderStatus = ProjectConstant.StatusApproved;
+                    ShoppingCartViewModel.Order.PaymentDate = DateTime.Now;
+                }
+
+            }
+
+            uow.Save();
             return RedirectToAction("OrderConfirmation", "Cart", new { id = ShoppingCartViewModel.Order.Id });
+        }
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id);
         }
     }
 }
